@@ -1,0 +1,32 @@
+﻿.syllable-wrapper, .word-wrapper {
+    background-color: dodgerblue;
+    height: 37px !important;
+    line-height: 45px;
+    border-radius: 10px;
+    padding: 0px 12px !important;
+    box-shadow: 6px 14px 16px 5px rgba(0,0,0,0.30);
+    cursor: grab;
+    margin-left: 4px;
+    margin-right: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.syllable, .word {
+    font-size: 20px;
+    font-family: var(--game-font);
+    font-weight: 700;
+    color: #F5F2E7;
+    transition: all 0.25s ease-in-out;
+    letter-spacing: 2px;
+}
+
+.word-wrapper {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.margin-left {
+    margin-left: auto;
+}

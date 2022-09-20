@@ -1,0 +1,79 @@
+﻿.separator-zone {
+    height: 100%;
+    width: 0px;
+    padding: 0 !important;
+    z-index: 10;
+    content-visibility: hidden;
+}
+
+.separator-item {
+    width: 15px;
+    height: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    background-color: transparent;
+}
+
+.incorrect-separation {
+    color: red;
+}
+
+.correct-separation {
+    color:  var(--game-correct);
+}
+
+.default-separation {
+    color: black;
+}
+
+.letter-wrapper {
+    width: auto !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.letter-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 37px !important;
+    height: 37px !important;
+    padding: 0 !important;
+    border-radius: 50%;
+    margin-left: 4px;
+    margin-right: 4px;
+    line-height: 45px;
+    position: relative;
+    background-color: dodgerblue;
+    cursor: pointer;
+    box-shadow: 6px 14px 16px 5px rgba(0,0,0,0.30);
+}
+
+.action-overlay {
+    position: absolute;
+    width: 58px;
+    height: 100%;
+    top: 0;
+    right: 50%;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.letter {
+    font-size: 25px;
+    font-family: var(--game-font);
+    color: #F5F2E7;
+    letter-spacing: 2px;
+}
+
+.show {
+    display: inline-block !important;
+}
+
+.hide {
+    display: none !important;
+}

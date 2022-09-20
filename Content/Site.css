@@ -1,0 +1,379 @@
+﻿@font-face {
+    font-family: MontserratRegular;
+    src: url('../fonts/Montserrat-Regular.ttf');
+}
+
+@font-face {
+    font-family: MontserratSemiBold;
+    src: url('../fonts/Montserrat-SemiBold.ttf');
+}
+
+@font-face {
+    font-family: FestiveRegular;
+    src: url('../fonts/Festive-Regular.ttf');
+}
+
+@font-face {
+    font-family: LuckiestGuy;
+    src: url('../fonts/IndieFlower-Regular.ttf');
+}
+
+@font-face {
+    font-family: ChauPhilimone;
+    src: url('../fonts/ChauPhilomeneOne-Regular.ttf');
+}
+
+@font-face {
+    font-family: LuckiestGuy;
+    src: url('../fonts/LuckiestGuy-Regular.ttf');
+}
+
+:root {
+    --red-dark-color: #780000;
+    --red-color: #c1121f;
+    --light-color: #f5f3f4;
+    --blue-color: #669bbc;
+    --blue-dark-color: #003049;
+    --game-correct: #6ECB63;
+    --game-font: LuckiestGuy;
+    --box-shadow: 5px 8px 12px 6px rgb(0 0 0 / 20%);
+}
+
+body {
+    margin: 0px !important;
+    background-color: #FEFDF8;
+}
+
+a, a:hover, a:active {
+    text-decoration: unset !important;
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    margin: 0;
+    font: inherit;
+    background-color: var(--light-color);
+    width: 15px;
+    height: 15px;
+    border-radius: 50% !important;
+    border: 1px solid black;
+    transform: translateY(3px);
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+}
+
+    input[type="checkbox"]::before {
+        content: "";
+        width: 13px;
+        height: 13px;
+        border-radius: 50% !important;
+        transform: scale(0);
+        transition: 0.25s transform ease-in-out;
+        box-shadow: inset 1em 1em #DD7F5A;
+    }
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+select {
+    -webkit-appearance: none;
+    height: 25px;
+    width: 100%;
+    width: 50px;
+    padding-left: 7px;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-family: MontserratRegular;
+    font-size: 15px;
+    background-color: #FEFDF8;
+    cursor: pointer;
+}
+
+select:focus-visible {
+    outline: none;
+}
+
+select option {
+    background: #EFF1F3 !important;
+}
+
+select option:checked,
+select option:hover {
+    box-shadow: 0 0 10px 100px #D77A61 inset;
+}
+
+.site-nav {
+    height: 86px;
+    width: 100%;
+    background-color: #DD7F5A;
+    box-shadow: var(--box-shadow);
+}
+
+.site-logo {
+    font-family: LuckiestGuy;
+    font-size: 50px;
+    margin-bottom: 0px;
+    color: #FEFDF8;
+    cursor: pointer;
+}
+
+.rank {
+    color: #F7EBE8;
+    transform: scale(1.5);
+    cursor: pointer;
+    font-size: 15px;
+    display: none;
+}
+
+.main-header, .game-title {
+    font-family: LuckiestGuy;
+    font-size: 40px;
+    margin-bottom: 0px;
+    color: #DD7F5A;
+}
+
+.match-row-info {
+    display: none;
+}
+
+.game-settings-box, .match-row-info {
+    border-radius: 10px;
+    background-color: #61A1D7;
+    box-shadow: var(--box-shadow);
+    transition: all 0.5s ease-in-out;
+    min-height: 40px;
+    margin: 10px 0px;
+}
+
+.setting-label, .setting {
+    font-size: 14px;
+    font-family: MontserratSemibold;
+    color: #FEFDF8;
+    padding: 0;
+}
+
+.setting label {
+    margin-bottom: 0px !important;
+}
+
+.game-description {
+    font-family: MontserratRegular;
+    font-size: 16px;
+    margin-bottom: 0px;
+    color: #61A1D7;
+}
+
+.checkbox-control {
+    font-family: MontserratSemiBold;
+    font-size: 14px;
+    display: grid;
+    grid-template-columns: 1em auto;
+    gap: 0.5em;
+    cursor: pointer;
+    height: max-content;
+    margin-bottom: 0px;
+    color: #FEFDF8;
+}
+
+.start-button,
+.game-button {
+    border-radius: 8px;
+    background-color: #DD7F5A;
+    padding: 5px 35px;
+    color: white;
+    font-family: LuckiestGuy;
+    cursor: pointer;
+    border: none;
+    box-shadow: var(--box-shadow);
+    transition: all .15s ease-in-out
+}
+
+    .start-button:hover {
+        transform: scale(0.97);
+        background-color: #61A1D7;
+    }
+
+    .start-button:focus,
+    .game-button:focus {
+        outline: none !important;
+    }
+
+    .play-again-button, .register-button {
+        display: none;
+    }
+
+.next-button {
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    background-color: #DD7F5A;
+    color: #FEFDF8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid;
+    cursor: pointer;
+    box-shadow: var(--box-shadow);
+}
+
+.game-box-label {
+    font-family: MontserratSemiBold;
+    font-size: 14px;
+    color: #FEFDF8;
+}
+
+.game-feedback-info {
+    font-family: MontserratRegular;
+    font-size: 14px;
+    color: #FEFDF8;
+}
+
+.game-box-info {
+    font-family: MontserratRegular;
+    font-size: 14px;
+    color: black;
+}
+
+.pop-info {
+    cursor: pointer;
+    color: #DD7F5A;
+}
+
+.popup-overlay, .rank-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 100vh;
+    width: 100vw;
+    display: none;
+    z-index: 15;
+}
+
+.popup {
+    background-color: #FEFDF8;
+    display: none;
+    width: 50%;
+    border-radius: 10px;
+}
+
+.popup-header {
+    font-family: LuckiestGuy;
+    font-size: 20px;
+    color: #DD7F5A;
+}
+
+.game-item-box {
+    background-color: #DD7F5A;
+    box-shadow: var(--box-shadow);
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    transition: all .15s ease-in-out;
+}
+
+.game-item-box:hover {
+    transform: scale(0.97);
+    background-color: #61A1D7;
+}
+
+.game-item-box h3 {
+    color: #FEFDF8;
+}
+
+.game-item-box:hover h3 {
+    color: #FEFDF8;
+}
+
+.game-item-box-title {
+    font-family: LuckiestGuy;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: unset !important;
+}
+
+.point-correct, .point-incorrect {
+    font-family: MontserratSemiBold;
+    font-size: 15px;
+}
+
+.point-correct {
+    color: var(--game-correct);
+}
+
+.point-incorrect {
+    color: var(--red-color);
+}
+
+.rank-container {
+    padding: 0;
+}
+
+.rank-wrapper {
+    margin: 0%;
+}
+
+.ranking {
+    background-color: #DD7F5A;
+}
+
+.rank-item {
+    background-color: #FEFDF8;
+    margin-top: 5px;
+    border-radius: 30px;
+}
+
+.rank-item label {
+    margin-bottom: 0% !important;
+}
+
+.rank-label {
+    font-family: MontserratSemiBold;
+    font-size: 14px;
+    color: #DD7F5A;
+}
+
+.top-header{
+    font-family: LuckiestGuy;
+    font-size: 25px;
+    color: var(--light-color);
+    margin-top: 5px;
+}
+
+@media screen and (max-width: 992px) {
+    .site-logo {
+        font-size: 35px;
+    }
+
+    .main-header {
+        font-size: 25px;
+    }
+
+    .game-item-box {
+        height: 100px;
+        width: 100px;
+    }
+
+    .game-item-box h3 {
+        font-size: 15px;
+    }
+
+    .game-description {
+        font-size: 12px;
+    }
+
+    .game-title {
+        font-size: 25px;
+    }
+
+    .popup {
+        width: 80%;
+    }
+
+    .game-settings-box {
+        padding: 10px 10px;
+        margin: 10px 0px;
+    }
+}

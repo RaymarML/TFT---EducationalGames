@@ -1,0 +1,52 @@
+﻿.letter-wrapper {
+    width: auto !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.letter-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px !important;
+    height: 55px !important;
+    padding: 0 !important;
+    border-radius: 50%;
+    margin-left: 4px;
+    margin-right: 4px;
+    line-height: 45px;
+    position: relative;
+    background-color: dodgerblue;
+    cursor: pointer;
+    box-shadow: 6px 14px 16px 5px rgba(0,0,0,0.30);
+}
+
+.letter {
+    font-size: 25px;
+    font-family: var(--game-font);
+    color: #F5F2E7;
+}
+
+.action-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0%;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.selected-ok {
+    background-color:  var(--game-correct) !important;
+}
+
+.selected-ko {
+    background-color: #FF7B7B !important;
+}
+
+.hovered {
+    background-color: #003B6D;
+}

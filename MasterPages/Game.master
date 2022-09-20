@@ -1,0 +1,276 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Game.master.cs" Inherits="EducationalGames.MasterPages.Game" %>
+
+<asp:Content ID="Style" ContentPlaceHolderID="StyleContent" runat="server">
+    <asp:ContentPlaceHolder ID="GameStyle" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+
+<asp:Content ID="GameContent" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:ScriptManager ID="GameScriptManager" runat="server" />
+    <asp:UpdatePanel ID="WordsUpdatePanel" runat="server">
+        <ContentTemplate>
+            <asp:HiddenField id="WordPlaceholder" runat="server" />
+            <asp:HiddenField id="MatchPlaceholder" runat="server" />
+            <asp:HiddenField 
+                id="RankItemPosition"
+                value="" 
+                runat="server" />
+            <asp:HiddenField 
+                id="MatchPointsPlaceholder"
+                value="" 
+                runat="server" />
+            <asp:Button 
+                id="matchFinished" 
+                OnClick="SaveMatch" 
+                UseSubmitBehavior="false"
+                type="button"
+                style="display:none"
+                runat="server" />
+
+            <asp:HiddenField 
+                id="AdvanceDificulty"
+                value="" 
+                runat="server" />
+            <asp:HiddenField 
+                id="TotalWords"
+                value="" 
+                runat="server" />
+            <asp:HiddenField 
+                id="TotalSyllables"
+                value="" 
+                runat="server" />
+            <asp:Button 
+                id="loadWordsButton" 
+                OnClick="LoadWords" 
+                UseSubmitBehavior="false"
+                type="button"
+                style="display:none"
+                runat="server" />
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
+    <div class="row mt-5 align-content-center justify-content-center">
+        <asp:ContentPlaceHolder ID="GameTitle" runat="server"></asp:ContentPlaceHolder>
+    </div>
+
+    <div class="row mt-2 align-content-center justify-content-center">
+        <asp:ContentPlaceHolder ID="GameDescription" runat="server"></asp:ContentPlaceHolder>
+    </div>
+
+    <div id="gameSettingsBox" class="row mt-3 game-settings-box px-3 align-items-center">
+        <div class="col-12 col-sm-6 col-lg-3 px-0">
+            <div class="row justify-content-center mx-0 align-items-center">
+                <label class="checkbox-control setting">
+                    <input id="continuedMode" type="checkbox"/>
+                    Modo continuo
+                </label>
+                <div class="pop-info">
+                    <i id="continuedModeInfo" class="ml-3 fa-solid fa-circle-info"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mt-2 mt-sm-0 px-0">
+            <div class="row justify-content-center mx-0 align-items-center">
+                <label class="checkbox-control setting">
+                    <input id="timeTrial" type="checkbox" />
+                    Contrarreloj
+                </label>
+                <div class="pop-info">
+                    <i id="timeTrialInfo" class="ml-3 fa-solid fa-circle-info"></i>
+                </div>
+            </div>
+        </div>
+        <asp:ContentPlaceHolder ID="GameSettings" runat="server"></asp:ContentPlaceHolder>
+    </div>
+
+    <div id="rankOverlay" class="rank-overlay">
+        <div class="rank-container container-fluid w-100 h-100">
+            <div class="rank-wrapper row w-100 h-100 justify-content-end align-content-stretch">
+                <div class="col-10 col-sm-8 col-md-6 col-lg-4 ranking">
+                    <div class="row justify-content-center">
+                        <h1 class="top-header">Top</h1>
+                    </div>
+                    <asp:ListView ID="rankItemsList" runat="server" 
+                        DataKeyNames="rankItemID" 
+                        GroupItemCount="1"
+                        ItemType="EducationalGames.Src.Models.RankItem" 
+                        SelectMethod="GetRankItems">
+                        <ItemTemplate>
+                            <div class="rank-item row mx-1 py-1 py-2 h-auto align-items-center">
+                                <div class="col-1 col-md-2">
+                                    <label class="rank-label"><%#:Item.position%></label>
+                                </div>
+                                <div class="col-4 col-md-5">
+                                    <label class="rank-label"><%#:Item.playerName%></label>
+                                </div>
+                                <div class="col-6 col-md-5">
+                                    <label class="rank-label"><%#:Item.points%> .ptos</label>
+                                </div>
+                            </div>
+                        </ItemTemplate>
+                        <EmptyDataTemplate>
+                            <div class="rank-item row mx-1 py-1 py-2 h-auto align-items-center">
+                                <div class="col-12">
+                                    <label class="rank-label">No existe un top aún, se el primero en apuntarte.</label>
+                                </div>
+                            </div>
+                         </EmptyDataTemplate>
+                    </asp:ListView>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popupOverlay" class="container-fluid popup-overlay">
+        <div id="popupWrapper" class="row h-100 justify-content-center align-content-center">
+            
+            <div id="continuedModePopup" class="p-3 popup">
+                <div class="row px-3">
+                    <h3 class="popup-header">Modo Continuado</h3>
+                </div>
+                <div class="row px-3 game-box-info">
+                    <p>En el modo continuado no pararás cuando acabes un ejercicio, saltará al siguiente automáticamente.</p>
+                </div>
+            </div>
+
+             <div id="timeTrialPopup" class="p-3 popup">
+                <div class="row px-3">
+                    <h3 class="popup-header">Contrarreloj</h3>
+                </div>
+                <div class="row px-3 game-box-info">
+                    <p>
+                        Con el modo contrarreloj tienes 5 segundos para terminar el ejercicio. 
+                        Si lo haces antes de que el tiempo se acabe obtienes +3 puntos. 
+                        Si se acaba el tiempo pierdes -3 puntos.
+                    </p>
+                </div>
+            </div>
+
+            <div id="advanceDificultyPopup" class="p-3 popup">
+                <div class="row px-3">
+                    <h3 class="popup-header">Difícultad avanzada</h3>
+                </div>
+                <div class="row px-3 game-box-info">
+                    <p>
+                        En el modo difícultad avanzada las palabras serán más complejas.
+                        Por cada selección correcta obtienes +2 puntos.
+                        Por cada selección incorrecta pierdes -2 puntos.
+                    </p>
+                </div>
+            </div>
+
+            <div id="notInRankPopup" class="p-3 popup">
+                <div class="row px-3">
+                    <h3 class="popup-header">Por poco</h3>
+                </div>
+                <div class="row px-3 game-box-info">
+                    <p>
+                        No has entrado en el top. Inténtalo de nuevo con los modos de juego alternativo
+                        para obtener más puntos.
+                    </p>
+                </div>
+            </div>   
+
+            <div id="rotateScreenPop" class="p-3 popup">
+                <div class="row px-3">
+                    <h3 class="popup-header">Gira el dispositvo para continuar</h3>
+                </div>
+                <div class="row px-3 game-box-info">
+                    <p>
+                        Es necesario girar la pantalla para mostrar todos los elementos. 
+                    </p>
+                </div>
+            </div>  
+
+           <asp:UpdatePanel ID="registerInRankPopUp" class="p-3 popup" runat="server">
+                <ContentTemplate>
+                    <div class="row px-3">
+                        <h3 class="popup-header">Haz entrado en el top</h3>
+                    </div>
+                    <div class="row px-3 game-box-info">
+                        <p>
+                            Haz obtenido 
+                            <asp:Label ID="PointsPopup" CssClass="game-box-info" runat="server"></asp:Label>
+                            puntos.
+                            Has entrado en la posición 
+                            <asp:Label ID="PositionPopup" CssClass="game-box-info" runat="server"></asp:Label>
+                            del top. 
+                            Introduce tu nombre o apodo.
+                        </p>
+                    </div>
+                    <div class="row px-3 game-box-info">
+                        <asp:TextBox ID="PlayerName" class="form-control" runat="server"/>
+                        <asp:Label ID="EmptyNameLabel" CssClass="game-box-info d-none" runat="server">Debes introducir un nombre o apodo para registrarte.</asp:Label>
+                    </div>
+                    <div class="row mt-3 px-3 game-box-info">
+                        <asp:Button 
+                            id="savePlayer"
+                            text="Guardar"
+                            class="game-button"
+                            OnClick="SavePlayer" 
+                            UseSubmitBehavior="false"
+                            runat="server" />
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+
+            <asp:ContentPlaceHolder ID="GamePopups" runat="server"></asp:ContentPlaceHolder>
+        </div>
+    </div>
+
+    <asp:ContentPlaceHolder ID="GameContainer" runat="server"></asp:ContentPlaceHolder>
+    
+    <div id="" class="row mb-3 mt-3 justify-content-center align-items-center">
+        <div id="actionPoints" class="row mr-3 justify-content-center align-items-center"></div>
+        <div id="nextButton" class="next-button d-none"><i class="fa-solid fa-arrow-right"></i></div>
+    </div>
+       
+
+
+        <div id="gameInfoBox" class="row mt-5 match-row-info justify-content-center align-items-center px-3 py-2">
+        <div class="col-12 col-sm-6 col-lg-3 mt-2 mt-lg-0">
+            <div class="row justify-content-center">
+                <span class="game-box-label">Rondas:&nbsp</span>
+                <span id="wordCounter" class="game-feedback-info">0</span>
+                <span class="game-box-label">&nbsp de &nbsp </span>
+                <span id="totalWords" class="game-feedback-info">0</span>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mt-2 mt-lg-0">
+            <div class="row justify-content-center">
+                <span class="game-box-label">Tiempo:&nbsp</span>
+                <span id="chronometer" class="game-feedback-info">00:00:00</span>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mt-2 mt-lg-0">
+            <div class="row justify-content-center">
+                <span class="game-box-label">Errores:&nbsp</span>
+                <span id="mistakesCounter" class="game-feedback-info">0</span>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mt-2 mt-lg-0">
+            <div class="row justify-content-center">
+                <span class="game-box-label">Puntos:&nbsp</span>
+                <span id="currentPoints" class="game-feedback-info">0</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-4 justify-content-center align-items-center">
+        <button id="playAgainButton" class="play-again-button game-button" type="button">Jugar de nuevo</button>
+        <button id="registerButton" class="mx-3 register-button game-button" type="button">Registrar</button>
+    </div>
+    
+    <script src="/Scripts/GameScripts/Timer.js"></script>
+    <script src="/Scripts/GameScripts/Settings.js"></script>
+    <script src="/Scripts/GameScripts/GameManager.js"></script>
+    <script src="/Scripts/GameScripts/PointsManager.js"></script>
+    <script src="/Scripts/GameScripts/Providers/Provider.js"></script>
+    <asp:ContentPlaceHolder ID="GameScripts" runat="server"></asp:ContentPlaceHolder>
+    <script>
+        document.getElementById("rank").style.display = "initial";
+        window.addEventListener("orientationchange", event => {
+            gameManager.setRotatedScreenHorizontally();
+        });
+    </script>
+</asp:Content>
+

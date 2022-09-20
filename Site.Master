@@ -1,0 +1,36 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="EducationalGames.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Mi aplicación ASP.NET</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <script src="https://kit.fontawesome.com/1cefb036e4.js" crossorigin="anonymous"></script>
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <asp:ContentPlaceHolder ID="StyleContent" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+    <form runat="server">
+        
+        <div class="site-nav">
+            <div class="container h-100">
+                <div class="row mx-0 mx-sm-3 h-100 align-items-center justify-content-between">
+                    <a runat="server" href="~/"><h1 class="site-logo">Palabrean-do</h1></a>
+                    <div id="rank" class="rank">
+                        <i class="fa-solid fa-list-ol"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" ClientIDMode="Static"></asp:ContentPlaceHolder>
+        </div>
+
+    </form>
+</body>
+</html>
