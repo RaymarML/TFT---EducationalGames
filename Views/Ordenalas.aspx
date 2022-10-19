@@ -6,7 +6,7 @@
 </asp:Content>
 
 <asp:Content ID="GameTitle" ContentPlaceHolderID="GameTitle" runat="server">
-<h1 class="game-title">Ordénalas</h1>
+<h1 class="game-title">Ordenalfa</h1>
 </asp:Content>
 
 <asp:Content ID="GameDescription" ContentPlaceHolderID="GameDescription" runat="server">

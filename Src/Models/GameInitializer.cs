@@ -23,12 +23,12 @@ namespace EducationalGames.Src.Models
                 },                
                 new Game
                 {
-                    name = "Diptongos e hiatos",
+                    name = "Dhiatongos",
                     url = "/Views/DiptongosHiatos.aspx",
                 },                
                 new Game
                 {
-                    name = "Sílaba tónica",
+                    name = "Silátonas",
                     url = "/Views/SilabaTonica.aspx",
                 },                
                 new Game
@@ -38,7 +38,7 @@ namespace EducationalGames.Src.Models
                 },                
                 new Game
                 {
-                    name = "Ordena",
+                    name = "Ordenalfa",
                     url = "/Views/Ordenalas.aspx",
                 },
                 new Game

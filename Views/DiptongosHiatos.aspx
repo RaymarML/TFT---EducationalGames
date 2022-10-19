@@ -6,7 +6,7 @@
 </asp:Content>
 
 <asp:Content ID="GameTitle" ContentPlaceHolderID="GameTitle" runat="server">
-<h1 class="game-title">Diptongos e hiatos</h1>
+<h1 class="game-title">Dhiatongos</h1>
 </asp:Content>
 
 <asp:Content ID="GameDescription" ContentPlaceHolderID="GameDescription" runat="server">
@@ -63,6 +63,7 @@
     </div>
     <div id="gameActions" class="row mb-3 mt-4 justify-content-center align-items-center">
         <button id="noneButton" class="d-none mx-3 game-button" type="button" data-id="-1">Ninguna</button>
+        <button id="tripthongButton" class="d-none mx-3 game-button" type="button" type-id="3">Triptongo</button>
         <button id="dipthongButton" class="d-none mx-3 game-button" type="button" type-id="2">Diptongo</button>
         <button id="hiatusButton" class="d-none mx-3 game-button" type="button" type-id="1">Hiato</button>
     </div>

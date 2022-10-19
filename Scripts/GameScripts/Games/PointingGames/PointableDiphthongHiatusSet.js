@@ -70,17 +70,21 @@
 
         document.getElementById("noneButton").classList.add("d-none");
         document.getElementById("dipthongButton").classList.remove("d-none");
+        document.getElementById("tripthongButton").classList.remove("d-none");
         document.getElementById("hiatusButton").classList.remove("d-none");
 
         document.getElementById("dipthongButton").addEventListener("click", this.alternativeModeCallBack, false);
+        document.getElementById("tripthongButton").addEventListener("click", this.alternativeModeCallBack, false);
         document.getElementById("hiatusButton").addEventListener("click", this.alternativeModeCallBack, false);
     }
 
     hideAlternativeMode() {
         document.getElementById("dipthongButton").classList.add("d-none");
         document.getElementById("hiatusButton").classList.add("d-none");
+        document.getElementById("tripthongButton").classList.add("d-none");
         document.getElementById("dipthongButton").removeEventListener("click", this.alternativeModeCallBack, false);
         document.getElementById("hiatusButton").removeEventListener("click", this.alternativeModeCallBack, false);
+        document.getElementById("tripthongButton").removeEventListener("click", this.alternativeModeCallBack, false);
     }
 
     buttonActions() {

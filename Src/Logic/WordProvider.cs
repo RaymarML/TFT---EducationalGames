@@ -31,12 +31,14 @@ namespace EducationalGames.Src.Logic
         public string GetDipthongHiatusGameWords(bool advanceDificulty)
         {
             string advancedDificultyQuery = advanceDificulty
-                ? "AND TRIPTONGO IS FALSE AND (DIPTONGO IS TRUE OR HIATO IS TRUE) "
+                //? "AND TRIPTONGO IS FALSE AND (DIPTONGO IS TRUE OR HIATO IS TRUE) "
+                ? "AND (TRIPTONGO IS TRUE OR DIPTONGO IS TRUE OR HIATO IS TRUE) "
                 : "AND TRIPTONGO IS FALSE AND (DIPTONGO IS TRUE OR HIATO IS TRUE) ";
 
             string sqlQuery = "SELECT PALABRA, SILABAS "
                 + "FROM palabras.palabras "
-                + "WHERE NUM_SILABAS <= 4 "
+                //+ "WHERE NUM_SILABAS <= 4 "
+                + "WHERE NUM_SILABAS <= 6 "
                 + advancedDificultyQuery
                 + "ORDER BY RAND() "
                 + "LIMIT 10;";
