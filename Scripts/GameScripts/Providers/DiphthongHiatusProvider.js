@@ -23,7 +23,7 @@
             "ú"
         ];
         this.extraAnswers = true;
-        this.extraAnswersArray = [];
+        this.answersArray = [];
     }
 
     getElements() {
@@ -38,12 +38,65 @@
         answers = answers.concat(this.getDipthongTripthongIndexes());
 
         if (answers.length == 0) answers = [-1];
-        return answers.sort((a, b) => a - b);
+        this.answersArray = [ ...answers.sort((a, b) => a - b) ];
+        return [ ...new Set(this.answersArray) ];
     }
 
 
     getExtraAnswers() {
-        return this.extraAnswersArray;
+        let elements = this.getElements();
+        let extraAnswersArray = [];
+        let aux = [];   
+
+        for (var i = 0; i < this.answersArray.length; i++) {
+            if (i > 0) {
+                
+                if (this.answersArray[i] - this.answersArray[i - 1] == 1) {
+
+
+                    if (!aux.includes(this.answersArray[i - 1])) {
+                        aux.push(this.answersArray[i - 1]);
+                    }
+
+                    if (!aux.includes(this.answersArray[i])) {
+                        aux.push(this.answersArray[i]);
+                    }
+                }
+
+                if (this.answersArray[i] - this.answersArray[i - 1] == 2
+                    && elements[this.answersArray[i] - 1] == 'h') {
+
+                    if (!aux.includes(this.answersArray[i - 1])) {
+                        aux.push(this.answersArray[i - 1]);
+                    }
+
+                    if (!aux.includes(this.answersArray[i])) {
+                        aux.push(this.answersArray[i]);
+                    }
+                }
+
+                if (this.answersArray[i] - this.answersArray[i - 1] != 1 || i == this.answersArray.length - 1) {
+
+                    if (aux.length == 3
+                        && this.isTripthong(elements[aux[0]], elements[aux[1]], elements[aux[2]])) {
+                        extraAnswersArray.push(3);
+                    }
+
+                    if (aux.length == 2 && this.isHiatus(elements[aux[0]], elements[aux[1]])) {
+                        extraAnswersArray.push(1);
+                    }
+
+                    if (aux.length == 2 && this.isDipthong(elements[aux[0]], elements[aux[1]])) {
+                        extraAnswersArray.push(2);
+                    }
+
+                    aux = [];
+                }
+            }
+        }
+
+
+        return extraAnswersArray;
     }
 
     getHiatusIndexes() {
@@ -63,7 +116,6 @@
                 if (this.isHiatusWithInterleavedH(letterA, letterB, letterC)) {
                     hiatusIndexes.push(firstIndex);
                     hiatusIndexes.push(thirdIndex);
-                    this.extraAnswersArray.push(1);
                 }
 
                 if (this.isHiatus(letterA, letterB)
@@ -72,7 +124,6 @@
                 ) {
                     hiatusIndexes.push(firstIndex);
                     hiatusIndexes.push(secondIndex);
-                    this.extraAnswersArray.push(1);
                 }
 
                 if (this.isHiatus(letterB, letterC)
@@ -81,7 +132,6 @@
                 ) {
                     hiatusIndexes.push(secondIndex);
                     hiatusIndexes.push(thirdIndex);
-                    this.extraAnswersArray.push(1);
                 }
             }
         }
@@ -116,7 +166,6 @@
                 dipthongTripthongIndexes = dipthongTripthongIndexes.concat(
                     tripthongIndexInSyllable.map(el => el + currentLetterIndex)
                 );
-                this.extraAnswersArray.push(3);
                 currentLetterIndex += syllables[i].length;
                 continue;
             }
@@ -125,7 +174,6 @@
                 dipthongTripthongIndexes = dipthongTripthongIndexes.concat(
                     dipthongIndexInSyllable.map(el => el + currentLetterIndex)
                 );
-                this.extraAnswersArray.push(2);
             }
 
             currentLetterIndex += syllables[i].length;

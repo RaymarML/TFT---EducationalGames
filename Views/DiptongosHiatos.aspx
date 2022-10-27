@@ -10,7 +10,7 @@
 </asp:Content>
 
 <asp:Content ID="GameDescription" ContentPlaceHolderID="GameDescription" runat="server">
-<h2 class="game-description">Señala las vocales que conforman diptongos e hiatos.</h2>
+<h2 class="game-description">Señala las vocales que conforman diptongos, triptongos e hiatos.</h2>
 </asp:Content>
 
 <asp:Content ID="GameSettings" ContentPlaceHolderID="GameSettings" runat="server">
@@ -37,7 +37,7 @@
     <div class="row justify-content-center mx-0 align-items-center">
         <label class="checkbox-control setting">
             <input id="hiatusTild" type="checkbox" />
-            Diptongo u hiato
+            Indicar clasificación
         </label>
         <div class="pop-info">
             <i id="hiatusTildInfo" class="ml-3 fa-solid fa-circle-info"></i>
@@ -52,7 +52,7 @@
         <h3 class="popup-header">Indicar diptongo o hiato</h3>
     </div>
     <div class="row px-3 game-box-info">
-        <p>Si inidcar si la sílaba tiene diptongo o hiato +7 puntos.</p>
+        <p>Si indicas correctamente si la sílaba tiene diptongo, hiato o triptongo obtienes +7 puntos.</p>
     </div>
 </div>
 </asp:Content>

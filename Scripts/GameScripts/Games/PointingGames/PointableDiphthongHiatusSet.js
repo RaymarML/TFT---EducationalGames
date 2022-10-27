@@ -94,7 +94,11 @@
 
     checkAlternativeMode(e) {
         let type = parseInt(e.target.getAttribute("type-id"));
-        if (this.alternativeModeAnswers.includes(type) && this.alternativeModeSelection.length < this.alternativeModeAnswers.length) {
+        let instancesInAnswers = this.alternativeModeAnswers.filter(x => x == type).length;
+        let instancesInSelection = this.alternativeModeSelection.filter(x => x == type).length;
+        let isFirstTimeCorrectSelection = this.alternativeModeAnswers.includes(type) && !this.alternativeModeSelection.includes(type);
+
+        if (isFirstTimeCorrectSelection || instancesInSelection < instancesInAnswers) {
             this.alternativeModeSelection.push(type);
         }
 
@@ -108,6 +112,14 @@
     }
 
     isAlternativeModeDone() {
-        return JSON.stringify(this.alternativeModeAnswers) == JSON.stringify(this.alternativeModeSelection);
+        let sortedSelection = [ ...this.alternativeModeSelection ];
+        sortedSelection.sort((a, b) => {
+            return a - b;
+        });
+        let sortedAnswers = [ ...this.alternativeModeAnswers ];
+        sortedAnswers.sort((a, b) => {
+            return a - b;
+        });
+        return JSON.stringify(sortedSelection) == JSON.stringify(sortedAnswers);
     }
 }
